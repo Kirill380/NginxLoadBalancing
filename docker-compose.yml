@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  laod-balancer:
+    image: nginx:latest
+    #    volumes:
+    #      - ./uk:/var/www/html
+    ports:
+      - 80:80
+  uk-server:
+    image: nginx:latest
+#    volumes:
+#      - ./uk:/var/www/html
+    ports:
+      - 8081:80
+  us-server-virginia:
+    image: nginx:latest
+    volumes:
+      - ./us_california:/var/www/html
+    ports:
+      - 8082:80
+  us-server-california:
+    image: nginx:latest
+    volumes:
+      - ./uk_virginia:/var/www/html
+    ports:
+      - 8083:80
+  general-server:
+    image: nginx:latest
+    ports:
+      - 8084:80
+  backup-server:
+    image: nginx:latest
+    ports:
+      - 8085:80
